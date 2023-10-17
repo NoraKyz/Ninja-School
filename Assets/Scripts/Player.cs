@@ -1,14 +1,16 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Animator anim;
-    
+
     [SerializeField] private float speed = 200f;
     [SerializeField] private float jumpForce = 300f;
+
+    [SerializeField] private Kunai kunaiPrefabs;
+    [SerializeField] private Transform throwPoint;
     
     private bool _isGrounded;
     private bool _isJumping;
@@ -20,13 +22,10 @@ public class Player : MonoBehaviour
     private int _coin = 0;
     private Vector3 _savePoint;
 
-    private string _currentAnimName;
-    
     // Start is called before the first frame update
     void Start()
     {
         SavePoint();
-        OnInit();
     }
 
     // Update is called once per frame
@@ -65,8 +64,10 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    public void OnInit()
+    public override void OnInit()
     {
+        base.OnInit();
+        
         _isAttack = false;
         _isDeath = false;
         _isJumping = false;
@@ -74,7 +75,16 @@ public class Player : MonoBehaviour
         ChangeAnim("idle");
         transform.position = _savePoint;
     }
-
+    public override void OnDespawn()
+    {
+        base.OnDespawn();
+        OnInit();
+    }
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+    }
+    
     private bool CheckGrounded()
     {
         var position  = transform.position;
@@ -156,21 +166,13 @@ public class Player : MonoBehaviour
         ChangeAnim("throw");
         _isAttack = true;
         Invoke(nameof(ResetAttack), 0.35f);
+        
+        Instantiate(kunaiPrefabs, throwPoint.position, throwPoint.rotation);
     }
     private void ResetAttack()
     {
         _isAttack = false;
     }
-    private void ChangeAnim(string animName)
-    {
-        if (_currentAnimName != animName)
-        {
-            anim.ResetTrigger(animName);
-            _currentAnimName = animName;
-            anim.SetTrigger(animName);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Coin"))
@@ -187,7 +189,6 @@ public class Player : MonoBehaviour
             Invoke(nameof(OnInit), 1f);
         }
     }
-
     internal void SavePoint()
     {
         _savePoint = transform.position;
