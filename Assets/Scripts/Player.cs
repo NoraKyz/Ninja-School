@@ -22,13 +22,12 @@ public class Player : Character
 
     private int _coin = 0;
     private Vector3 _savePoint;
-    
+
     private void Start()
     {
+        SavePoint();
         OnInit();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (_isDeath)
@@ -74,12 +73,17 @@ public class Player : Character
         
         ChangeAnim("idle");
         DeActiveAttack();
-        SavePoint();
+        transform.position = _savePoint;
     }
     public override void OnDespawn()
     {
         base.OnDespawn();
         OnInit();
+    }
+    protected override void OnDeath()
+    {
+        _isDeath = true;
+        base.OnDeath();
     }
     private bool CheckGrounded()
     {
@@ -190,10 +194,7 @@ public class Player : Character
 
         if (col.CompareTag("DeathZone"))
         {
-            _isDeath = true;
-            ChangeAnim("die");
-            
-            Invoke(nameof(OnInit), 1f);
+            OnDeath();
         }
     }
     internal void SavePoint()
