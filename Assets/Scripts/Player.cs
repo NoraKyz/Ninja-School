@@ -23,11 +23,6 @@ public class Player : Character
     private int _coin = 0;
     private Vector3 _savePoint;
 
-    private void Start()
-    {
-        SavePoint();
-        OnInit();
-    }
     void Update()
     {
         if (_isDeath)
@@ -74,6 +69,7 @@ public class Player : Character
         ChangeAnim("idle");
         DeActiveAttack();
         transform.position = _savePoint;
+        SavePoint();
     }
     public override void OnDespawn()
     {
