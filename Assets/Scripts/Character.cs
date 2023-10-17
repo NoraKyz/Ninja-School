@@ -22,14 +22,15 @@ public class Character : MonoBehaviour
     }
     protected virtual void OnDeath()
     {
+        Debug.Log("Character OnDeath");
         ChangeAnim("die");
         
         Invoke(nameof(OnDespawn), 2f);
     }
-
     
     public void OnHit(float damage)
     {
+        Debug.Log(_hp);
         if (!IsDead)
         {
             _hp -= damage;

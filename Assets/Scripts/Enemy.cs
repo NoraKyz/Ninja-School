@@ -7,6 +7,8 @@ public class Enemy : Character
     [SerializeField] private float moveSpeed;
     [SerializeField] private Rigidbody2D rb;
     
+    [SerializeField] private GameObject attackArea;
+    
     private IState _currentState;
     private bool _isRight = true;
     
@@ -26,6 +28,7 @@ public class Enemy : Character
         base.OnInit();
         
         ChangeState(new IdleState());
+        DeActiveAttack();
     }
 
     public override void OnDespawn()
@@ -91,6 +94,8 @@ public class Enemy : Character
     public void Attack()
     {
         ChangeAnim("attack");
+        ActiveAttack();
+        Invoke(nameof(DeActiveAttack), 0.2f);
     }
 
     public bool IsTargetInRange()
@@ -103,7 +108,14 @@ public class Enemy : Character
         _isRight = isRight;
         transform.rotation = _isRight ? Quaternion.Euler(Vector3.zero) : Quaternion.Euler(Vector3.up * 180);
     }
-
+    private void ActiveAttack()
+    {
+        attackArea.SetActive(true);
+    }
+    private void DeActiveAttack()
+    {
+        attackArea.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("EnemyWall"))

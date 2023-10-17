@@ -11,7 +11,8 @@ public class Player : Character
 
     [SerializeField] private Kunai kunaiPrefabs;
     [SerializeField] private Transform throwPoint;
-    
+    [SerializeField] private GameObject attackArea;
+
     private bool _isGrounded;
     private bool _isJumping;
     private bool _isAttack = false;
@@ -21,11 +22,10 @@ public class Player : Character
 
     private int _coin = 0;
     private Vector3 _savePoint;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
-        SavePoint();
+        OnInit();
     }
 
     // Update is called once per frame
@@ -67,24 +67,20 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
-        
+
         _isAttack = false;
         _isDeath = false;
         _isJumping = false;
         
         ChangeAnim("idle");
-        transform.position = _savePoint;
+        DeActiveAttack();
+        SavePoint();
     }
     public override void OnDespawn()
     {
         base.OnDespawn();
         OnInit();
     }
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-    }
-    
     private bool CheckGrounded()
     {
         var position  = transform.position;
@@ -154,6 +150,8 @@ public class Player : Character
         rb.velocity = Vector2.zero;
         ChangeAnim("attack");
         Invoke(nameof(ResetAttack), 0.35f);
+        ActiveAttack();
+        Invoke(nameof(DeActiveAttack), 0.2f);
     }
     private void Throw()
     {
@@ -173,6 +171,15 @@ public class Player : Character
     {
         _isAttack = false;
     }
+    private void ActiveAttack()
+    {
+        attackArea.SetActive(true);
+    }
+    private void DeActiveAttack()
+    {
+        attackArea.SetActive(false);
+    }
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Coin"))

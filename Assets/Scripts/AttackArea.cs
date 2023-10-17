@@ -9,6 +9,7 @@ public class AttackArea : MonoBehaviour
     {
         if (col.CompareTag("Player") || col.CompareTag("Enemy"))
         {
+            Debug.Log(col.tag);
             col.GetComponent<Character>().OnHit(30f);
         }
     }
