@@ -8,6 +8,8 @@ public class Kunai : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private float damage;
+    
+    [SerializeField] private GameObject hitVFX;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class Kunai : MonoBehaviour
         if (col.CompareTag("Enemy"))
         {
             col.GetComponent<Enemy>().OnHit(damage);
+            Instantiate(hitVFX, transform.position, transform.rotation);
             OnDeSpawn();
         }
     }

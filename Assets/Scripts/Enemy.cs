@@ -17,7 +17,7 @@ public class Enemy : Character
 
     private void Update()
     {
-        if (_currentState != null)
+        if (_currentState != null && !IsDead)
         {
             _currentState.OnExecute(this);
         }
@@ -95,7 +95,7 @@ public class Enemy : Character
     {
         ChangeAnim("attack");
         ActiveAttack();
-        Invoke(nameof(DeActiveAttack), 0.2f);
+        Invoke(nameof(DeActiveAttack), 0.35f);
     }
 
     public bool IsTargetInRange()

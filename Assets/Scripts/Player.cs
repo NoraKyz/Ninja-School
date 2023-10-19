@@ -16,16 +16,20 @@ public class Player : Character
     private bool _isGrounded;
     private bool _isJumping;
     private bool _isAttack = false;
-    private bool _isDeath = false;
     private float _horizontal;
     private string _buttonPressed;
 
     private int _coin = 0;
     private Vector3 _savePoint;
 
+    private void Start()
+    {
+        SavePoint();
+        OnInit();
+    }
     void Update()
     {
-        if (_isDeath)
+        if (IsDead)
         {
             return;
         }
@@ -50,7 +54,7 @@ public class Player : Character
 
     void FixedUpdate()
     {
-        if (_isDeath)
+        if (IsDead)
         {
             return;
         }
@@ -63,13 +67,11 @@ public class Player : Character
         base.OnInit();
 
         _isAttack = false;
-        _isDeath = false;
         _isJumping = false;
         
         ChangeAnim("idle");
         DeActiveAttack();
         transform.position = _savePoint;
-        SavePoint();
     }
     public override void OnDespawn()
     {
@@ -78,7 +80,6 @@ public class Player : Character
     }
     protected override void OnDeath()
     {
-        _isDeath = true;
         base.OnDeath();
     }
     private bool CheckGrounded()
@@ -149,9 +150,9 @@ public class Player : Character
         _isAttack = true;
         rb.velocity = Vector2.zero;
         ChangeAnim("attack");
-        Invoke(nameof(ResetAttack), 0.35f);
+        Invoke(nameof(ResetAttack), 0.5f);
         ActiveAttack();
-        Invoke(nameof(DeActiveAttack), 0.2f);
+        Invoke(nameof(DeActiveAttack), 0.5f);
     }
     private void Throw()
     {
@@ -159,12 +160,11 @@ public class Player : Character
         {
             return;
         }
-
+        
+        _isAttack = true;
         rb.velocity = Vector2.zero;
         ChangeAnim("throw");
-        _isAttack = true;
         Invoke(nameof(ResetAttack), 0.35f);
-        
         Instantiate(kunaiPrefabs, throwPoint.position, throwPoint.rotation);
     }
     private void ResetAttack()
@@ -190,7 +190,7 @@ public class Player : Character
 
         if (col.CompareTag("DeathZone"))
         {
-            OnDeath();
+            OnHit(Mathf.Infinity);
         }
     }
     internal void SavePoint()
