@@ -20,7 +20,13 @@ public class Player : Character
     private string _buttonPressed;
 
     private int _coin = 0;
+    
     private Vector3 _savePoint;
+
+    private void Awake()
+    {
+        _coin = PlayerPrefs.GetInt("coin", 0);
+    }
 
     private void Start()
     {
@@ -65,6 +71,7 @@ public class Player : Character
         ChangeAnim("idle");
         DeActiveAttack();
         transform.position = _savePoint;
+        UIManager.Instance.SetCoin(_coin);
     }
 
     public override void OnDespawn()
@@ -95,8 +102,9 @@ public class Player : Character
         {
             return;
         }
-
-        //_horizontal = Input.GetAxisRaw("Horizontal");
+        
+        Debug.LogWarning("Move() by button disabled");
+        _horizontal = Input.GetAxisRaw("Horizontal");
 
         if (_isGrounded)
         {
@@ -200,6 +208,8 @@ public class Player : Character
         {
             Destroy(col.gameObject);
             _coin++;
+            PlayerPrefs.SetInt("coin", _coin);
+            UIManager.Instance.SetCoin(_coin);
         }
 
         if (col.CompareTag("DeathZone"))

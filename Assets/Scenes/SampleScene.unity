@@ -4382,6 +4382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 629942845}
+  - component: {fileID: 629942846}
   m_Layer: 0
   m_Name: -----UIManager-----
   m_TagString: Untagged
@@ -4404,6 +4405,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629942846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629942844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c78f859c268fd47876a83f6d7cae3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCoin: {fileID: 1182368234}
 --- !u!1 &661321246
 GameObject:
   m_ObjectHideFlags: 0
@@ -6654,11 +6668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4300244648605425006, guid: daf5ce4f4789e3c49b139533f1c544c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.61583
+      value: 36.38
       objectReference: {fileID: 0}
     - target: {fileID: 4300244648605425006, guid: daf5ce4f4789e3c49b139533f1c544c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3329263
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 4300244648605425006, guid: daf5ce4f4789e3c49b139533f1c544c0, type: 3}
       propertyPath: m_LocalPosition.z
