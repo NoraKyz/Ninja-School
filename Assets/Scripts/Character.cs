@@ -4,6 +4,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private Animator anim;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private TextCombat textCombatPrefabs;
 
     private float _hp;
     private string _currentAnimName;
@@ -41,6 +42,7 @@ public class Character : MonoBehaviour
             }
             
             healthBar.SetNewHp(_hp);
+            Instantiate(textCombatPrefabs, transform.position, Quaternion.identity).OnInit(damage);
         }
     }
     protected void ChangeAnim(string animName)
