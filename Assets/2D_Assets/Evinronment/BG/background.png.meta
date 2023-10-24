@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb376ea3b87038a49bb03a3b810a5d03
+guid: 60b52a08ce5f3144f83a7bf85de1aff5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,70 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: BackgroundClouds_SpriteSheet_0
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 176
-        width: 352
-        height: 79
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f861669bbd715d34d9bed03b87d9a0c2
-      internalID: 612293785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundClouds_SpriteSheet_1
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 175
-        width: 145
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3196e6ff2d1db94c9e444a43d0fabae
-      internalID: -2023139066
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BackgroundClouds_SpriteSheet_2
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 124
-        width: 168
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef16ab6be21b23a43b3d97fea6b5b953
-      internalID: -1536241355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -189,10 +126,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      BackgroundClouds_SpriteSheet_0: 612293785
-      BackgroundClouds_SpriteSheet_1: -2023139066
-      BackgroundClouds_SpriteSheet_2: -1536241355
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

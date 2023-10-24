@@ -89,9 +89,9 @@ public class Player : Character
     {
         var position = transform.position;
 
-        Debug.DrawLine(position, position + Vector3.down * 0.75f, Color.red);
+        Debug.DrawLine(position, position + Vector3.down * 0.37f, Color.red);
 
-        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 0.75f, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 0.37f, groundLayer);
 
         return hit.collider != null;
     }
