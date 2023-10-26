@@ -7,7 +7,7 @@ public class SavePoint : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<Player>().SavePoint();
+            col.GetComponent<Player1>().SavePoint();
         }
     }
 }
