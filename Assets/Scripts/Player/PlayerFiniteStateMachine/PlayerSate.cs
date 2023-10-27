@@ -28,8 +28,7 @@ public class PlayerSate
     
     public virtual void Exit()
     {
-        player.Anim.SetBool(animBoolName, false);
-
+        player.Anim.SetBool(animBoolName, false);  
     }
     
     public virtual void LogicUpdate()
