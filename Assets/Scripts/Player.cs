@@ -3,29 +3,36 @@ using UnityEngine;
 
 public class Player : Character
 {
+    [Header("=========================================")]
+    [SerializeField] private PlayerData playerData;
+    
+    [Header("=========================================")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LayerMask groundLayer;
-
-    [SerializeField] private float speed = 200f;
-    [SerializeField] private float jumpForce = 300f;
-
+    
+    [Header("=========================================")]
     [SerializeField] private Kunai kunaiPrefabs;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
 
     private bool _isGrounded;
     private bool _isJumping;
-    private bool _isAttack = false;
+    private bool _isAttack;
     private float _horizontal;
     private string _buttonPressed;
 
-    private int _coin = 0;
+    private float moveSpeed;
+    private float jumpForce;
+    
+    private int coin;
     
     private Vector3 _savePoint;
 
+    #region Unity Functions
+
     private void Awake()
     {
-        _coin = PlayerPrefs.GetInt("coin", 0);
+        coin = PlayerPrefs.GetInt("coin", 0);
     }
 
     private void Start()
@@ -61,30 +68,40 @@ public class Player : Character
         }
     }
 
-    public override void OnInit()
+    #endregion
+
+    #region Base Functions
+
+    protected override void OnInit()
     {
         base.OnInit();
 
-        _isAttack = false;
-        _isJumping = false;
-
         ChangeAnim("idle");
         DeActiveAttack();
-        transform.position = _savePoint;
-        UIManager.Instance.SetCoin(_coin);
+        UIManager.Instance.SetCoin(coin);
     }
-
+    protected override void InitProperties()
+    {
+        base.InitProperties();
+        
+        transform.position = _savePoint;
+        
+        Hp = playerData.health;
+        moveSpeed = playerData.speed;
+        jumpForce = playerData.jumpForce;
+        
+        _isAttack = false;
+        _isJumping = false;
+    }
     public override void OnDespawn()
     {
         base.OnDespawn();
         OnInit();
     }
 
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-    }
-
+    #endregion
+    
+    #region Other Functions
     private bool CheckGrounded()
     {
         var position = transform.position;
@@ -130,7 +147,7 @@ public class Player : Character
         // move
         if (Mathf.Abs(_horizontal) > 0.1f)
         {
-            rb.velocity = new Vector2(_horizontal * speed, rb.velocity.y);
+            rb.velocity = new Vector2(_horizontal * moveSpeed, rb.velocity.y);
             transform.rotation = Quaternion.Euler(new Vector3(0, _horizontal > 0 ? 0 : 180, 0));
         }
         // idle
@@ -207,9 +224,9 @@ public class Player : Character
         if (col.CompareTag("Coin"))
         {
             Destroy(col.gameObject);
-            _coin++;
-            PlayerPrefs.SetInt("coin", _coin);
-            UIManager.Instance.SetCoin(_coin);
+            coin++;
+            PlayerPrefs.SetInt("coin", coin);
+            UIManager.Instance.SetCoin(coin);
         }
 
         if (col.CompareTag("DeathZone"))
@@ -222,4 +239,5 @@ public class Player : Character
     {
         _savePoint = transform.position;
     }
+    #endregion
 }

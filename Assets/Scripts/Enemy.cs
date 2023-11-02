@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    [SerializeField] private float attackRange;
-    [SerializeField] private float moveSpeed;
+    [Header("=========================================")]
+    [SerializeField] private EnemyData enemyData;
+    
+    [Header("=========================================")]
     [SerializeField] private Rigidbody2D rb;
     
+    [Header("=========================================")]
     [SerializeField] private GameObject attackArea;
     
     private IState _currentState;
     private bool _isRight = true;
     
+    private float moveSpeed;
+    private float attackRange;
+    
     private Character _target;
-    public Character Target => _target;
+
+    public Character Target
+    {
+        get => _target;
+        set => _target = value;
+    }
+
+    #region Unity Functions
 
     private void Update()
     {
@@ -23,12 +36,25 @@ public class Enemy : Character
         }
     }
 
-    public override void OnInit()
+    #endregion
+
+    #region Base Functions
+    
+    protected override void OnInit()
     {
         base.OnInit();
         
         ChangeState(new IdleState());
         DeActiveAttack();
+    }
+    
+    protected override void InitProperties()
+    {
+        base.InitProperties();
+        
+        Hp = enemyData.health;
+        moveSpeed = enemyData.speed;
+        attackRange = enemyData.attackRange;
     }
 
     public override void OnDespawn()
@@ -43,6 +69,10 @@ public class Enemy : Character
         base.OnDeath();
     }
     
+    #endregion
+
+    #region Other Functions
+
     internal void SetTarget(Character target)
     {
         _target = target;
@@ -123,5 +153,7 @@ public class Enemy : Character
             ChangeDirection(!_isRight);
         }
     }
+    
 
+    #endregion
 }

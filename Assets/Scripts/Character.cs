@@ -2,56 +2,78 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("Parent variables")]
     [SerializeField] private Animator anim;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextCombat textCombatPrefabs;
 
-    private float _hp;
-    private string _currentAnimName;
-    public bool IsDead => _hp <= 0;
+    private float hp;
+    private string currentAnimName;
+    protected bool IsDead => hp <= 0;
+    public float Hp
+    {
+        get => hp;
+        set => hp = value;
+    }
+
+    #region Unity Functions
 
     private void Start()
     {
         OnInit();
     }
 
-    public virtual void OnInit()
+    #endregion
+
+    #region Base Functions
+
+    protected virtual void OnInit()
     {
-        _hp = 100;
-        healthBar.OnInit(_hp);
+        InitProperties();
+        healthBar.OnInit(hp);
     }
-    public virtual void OnDespawn()
-    {
-    }
+    protected virtual void InitProperties() { }
     protected virtual void OnDeath()
     {
         ChangeAnim("die");
         Invoke(nameof(OnDespawn), 1f);
     }
-    
-    public void OnHit(float damage)
-    {
-        if (!IsDead)
-        {
-            _hp -= damage;
+    public virtual void OnDespawn() { }
 
-            if (IsDead)
-            {
-                _hp = 0;
-                OnDeath();
-            }
-            
-            healthBar.SetNewHp(_hp);
-            Instantiate(textCombatPrefabs, transform.position, Quaternion.identity).OnInit(damage);
-        }
-    }
+    #endregion
+
+    #region Other Functions
+
     protected void ChangeAnim(string animName)
     {
-        if (_currentAnimName != animName)
+        if (currentAnimName == animName)
         {
-            anim.ResetTrigger(animName);
-            _currentAnimName = animName;
-            anim.SetTrigger(animName);
+            return;
         }
+        
+        anim.ResetTrigger(animName);
+        currentAnimName = animName;
+        anim.SetTrigger(animName);
     }
+    public void OnHit(float damage)
+    {
+        if (IsDead)
+        {
+            return;
+        }
+
+        hp -= damage;
+
+        if (IsDead)
+        {
+            hp = 0;
+            OnDeath();
+        }
+            
+        healthBar.SetNewHp(hp);
+        Instantiate(textCombatPrefabs, transform.position, Quaternion.identity).OnInit(damage);
+    }
+
+    #endregion
+    
 }

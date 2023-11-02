@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class AttackArea : MonoBehaviour
 {
+    [SerializeField] private Transform target;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") || col.CompareTag("Enemy"))
+        if (col.CompareTag(target.tag))
         {
             col.GetComponent<Character>().OnHit(30f);
         }

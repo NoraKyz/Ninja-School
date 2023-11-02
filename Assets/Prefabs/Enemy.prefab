@@ -90,8 +90,8 @@ MonoBehaviour:
   anim: {fileID: 7773177454268912352}
   healthBar: {fileID: 7837519820947549531}
   textCombatPrefabs: {fileID: 1043135529519695481, guid: 324ffc64c5b6c364c8a40a63728cfec9, type: 3}
+  enemyData: {fileID: 11400000, guid: 5f1268da09a2de340851930e5670c61d, type: 2}
   attackRange: 1
-  moveSpeed: 1
   rb: {fileID: 4744490727833108338}
   attackArea: {fileID: 3468856585828876799}
 --- !u!1 &1105355548646808588
@@ -415,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d252e66d666e511439362b797974c6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 4300244648605425006, guid: daf5ce4f4789e3c49b139533f1c544c0, type: 3}
 --- !u!61 &3929507648244409553
 BoxCollider2D:
   m_ObjectHideFlags: 0
