@@ -22,6 +22,7 @@ public class Player : Character
 
     private float moveSpeed;
     private float jumpForce;
+    private int jumpCount;
     
     private int coin;
     
@@ -72,6 +73,22 @@ public class Player : Character
         var cacheTransform = transform;
         Gizmos.DrawWireCube(cacheTransform.position - cacheTransform.up * playerData.castDistance, playerData.groundBoxSize);
     }
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Coin"))
+        {
+            Destroy(col.gameObject);
+            coin++;
+            PlayerPrefs.SetInt("coin", coin);
+            UIManager.Instance.SetCoin(coin);
+        }
+
+        if (col.CompareTag("DeathZone"))
+        {
+            OnHit(Mathf.Infinity);
+        }
+    }
 
     #endregion
 
@@ -94,6 +111,7 @@ public class Player : Character
         Hp = playerData.health;
         moveSpeed = playerData.speed;
         jumpForce = playerData.jumpForce;
+        jumpCount = 0;
         
         _isAttack = false;
         _isJumping = false;
@@ -124,8 +142,7 @@ public class Player : Character
         {
             return;
         }
-        
-        Debug.LogWarning("Move() by button disabled");
+
         _horizontal = Input.GetAxisRaw("Horizontal");
 
         if (_isGrounded)
@@ -134,6 +151,8 @@ public class Player : Character
             {
                 return;
             }
+            
+            ResetJumpCount();
 
             // change anim run
             if (Mathf.Abs(_horizontal) > 0.1f)
@@ -165,13 +184,16 @@ public class Player : Character
     
     public void Jump()
     {
-        if (!_isGrounded)
+        if (!_isGrounded && jumpCount >= 2)
         {
             return;
         }
         
         _isJumping = true;
+        jumpCount++;
+        
         ChangeAnim("jump");
+        rb.velocity = Vector2.zero;
         rb.AddForce(jumpForce * Vector2.up);
     }
     
@@ -207,17 +229,15 @@ public class Player : Character
     #endregion
     
     #region Other Functions
-
-    
-    
     public void SetMove(float horizontal)
     {
         _horizontal = horizontal;
     }
 
-    
-
-    
+    private void ResetJumpCount()
+    {
+        jumpCount = 0;
+    }
 
     private void ResetAttack()
     {
@@ -232,22 +252,6 @@ public class Player : Character
     private void DeActiveAttack()
     {
         attackArea.SetActive(false);
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Coin"))
-        {
-            Destroy(col.gameObject);
-            coin++;
-            PlayerPrefs.SetInt("coin", coin);
-            UIManager.Instance.SetCoin(coin);
-        }
-
-        if (col.CompareTag("DeathZone"))
-        {
-            OnHit(Mathf.Infinity);
-        }
     }
 
     internal void SavePoint()

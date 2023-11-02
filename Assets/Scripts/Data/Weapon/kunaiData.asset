@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d07925e35fc644d87100e91fc03663, type: 3}
-  m_Name: playerData
+  m_Script: {fileID: 11500000, guid: 4ac45785e5e9fd846951038f83824226, type: 3}
+  m_Name: kunaiData
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 3
-  jumpForce: 300
-  castDistance: 0.36
-  groundBoxSize: {x: 0.26, y: 0.06}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  speed: 5
+  damage: 15
+  critRate: 20
+  thrustForce: 100
