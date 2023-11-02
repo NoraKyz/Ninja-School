@@ -267,8 +267,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4300244648605425006}
+  - component: {fileID: 1746177606964907680}
   - component: {fileID: 4300244648605424993}
-  - component: {fileID: 4300244648605424992}
   - component: {fileID: 4300244648605424995}
   m_Layer: 7
   m_Name: Player
@@ -296,6 +296,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1746177606964907680
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300244648605425007}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.000012715657, y: -0.025589067}
+  m_Size: {x: 1.6259003, y: 4.326654}
+  m_Direction: 0
 --- !u!50 &4300244648605424993
 Rigidbody2D:
   serializedVersion: 4
@@ -312,27 +328,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5f0c8fba6a4673940983d93a2cd48104, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &4300244648605424992
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300244648605425007}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.056845345, y: 0}
-  m_Size: {x: 1.6606776, y: 4.409235}
-  m_Direction: 0
 --- !u!114 &4300244648605424995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,9 +350,6 @@ MonoBehaviour:
   textCombatPrefabs: {fileID: 1043135529519695481, guid: 324ffc64c5b6c364c8a40a63728cfec9, type: 3}
   playerData: {fileID: 11400000, guid: ff03b3707bbcbbc49bbdd13052ab8e43, type: 2}
   rb: {fileID: 4300244648605424993}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   kunaiPrefabs: {fileID: 4665303210608445789, guid: bc40da45315db1a4b90b57648e5a6747, type: 3}
   throwPoint: {fileID: 4300244648846412546}
   attackArea: {fileID: 4300244648862446772}
