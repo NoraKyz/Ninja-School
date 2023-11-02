@@ -13,4 +13,10 @@ public class PlayerData : ScriptableObject
     
     [Header("Jump State")]
     public float jumpForce;
+    
+    [Header("Check Variables")]
+    [Header("Ground Check")]
+    public float castDistance;
+    public Vector2 groundBoxSize;
+    public LayerMask groundLayer;
 }

@@ -8,8 +8,7 @@ public class Player : Character
     
     [Header("=========================================")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private LayerMask groundLayer;
-    
+
     [Header("=========================================")]
     [SerializeField] private Kunai kunaiPrefabs;
     [SerializeField] private Transform throwPoint;
@@ -67,6 +66,12 @@ public class Player : Character
             Throw();
         }
     }
+    
+    private void OnDrawGizmos()
+    {
+        var cacheTransform = transform;
+        Gizmos.DrawWireCube(cacheTransform.position - cacheTransform.up * playerData.castDistance, playerData.groundBoxSize);
+    }
 
     #endregion
 
@@ -100,18 +105,18 @@ public class Player : Character
     }
 
     #endregion
-    
-    #region Other Functions
+
+    #region Check Functions
+
     private bool CheckGrounded()
     {
-        var position = transform.position;
-
-        Debug.DrawLine(position, position + Vector3.down * 0.37f, Color.red);
-
-        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 0.37f, groundLayer);
-
-        return hit.collider != null;
+        var cacheTransform = transform;
+        return Physics2D.BoxCast(cacheTransform.position, playerData.groundBoxSize, 0, -cacheTransform.up, playerData.castDistance, playerData.groundLayer);
     }
+
+    #endregion
+
+    #region Action Functions
 
     private void Move()
     {
@@ -158,11 +163,6 @@ public class Player : Character
         }
     }
     
-    public void SetMove(float horizontal)
-    {
-        _horizontal = horizontal;
-    }
-
     public void Jump()
     {
         if (!_isGrounded)
@@ -174,7 +174,7 @@ public class Player : Character
         ChangeAnim("jump");
         rb.AddForce(jumpForce * Vector2.up);
     }
-
+    
     public void Attack()
     {
         if (_isAttack || !_isGrounded)
@@ -203,6 +203,21 @@ public class Player : Character
         Invoke(nameof(ResetAttack), 0.35f);
         Instantiate(kunaiPrefabs, throwPoint.position, throwPoint.rotation);
     }
+    
+    #endregion
+    
+    #region Other Functions
+
+    
+    
+    public void SetMove(float horizontal)
+    {
+        _horizontal = horizontal;
+    }
+
+    
+
+    
 
     private void ResetAttack()
     {

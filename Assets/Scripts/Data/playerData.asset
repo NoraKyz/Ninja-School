@@ -15,3 +15,8 @@ MonoBehaviour:
   health: 100
   speed: 3
   jumpForce: 300
+  castDistance: 0.36
+  groundBoxSize: {x: 0.26, y: 0.06}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
