@@ -55,7 +55,7 @@ public class Character : MonoBehaviour
         currentAnimName = animName;
         anim.SetTrigger(animName);
     }
-    public void OnHit(float damage)
+    public void OnHit(float damage, bool isCritical = false)
     {
         if (IsDead)
         {
@@ -71,7 +71,7 @@ public class Character : MonoBehaviour
         }
             
         healthBar.SetNewHp(hp);
-        Instantiate(textCombatPrefabs, transform.position, Quaternion.identity).OnInit(damage);
+        Instantiate(textCombatPrefabs, transform.position, Quaternion.identity).OnInit(damage, isCritical);
     }
 
     #endregion

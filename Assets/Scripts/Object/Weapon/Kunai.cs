@@ -18,7 +18,7 @@ public class Kunai : FlyWeapon
         {
             if (IsCrits())
             {
-                col.GetComponent<Enemy>().OnHit(damage * 2);
+                col.GetComponent<Enemy>().OnHit(damage * 2, true);
             }
             else
             {
