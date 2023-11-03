@@ -3,36 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kunai : MonoBehaviour
+public class Kunai : FlyWeapon
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float speed;
-    [SerializeField] private float damage;
-    
     [SerializeField] private GameObject hitVFX;
-
-    private void Start()
+    protected override void OnInit()
     {
-        OnInit();
-    }
-
-    public void OnInit()
-    {
+        base.OnInit();
         rb.velocity = transform.right * speed;
-        
-        Invoke(nameof(OnDeSpawn), 4f);
     }
-    public void OnDeSpawn()
-    {
-        Destroy(gameObject);
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Enemy"))
         {
-            col.GetComponent<Enemy>().OnHit(damage);
-            Instantiate(hitVFX, transform.position, transform.rotation);
+            if (IsCrits())
+            {
+                col.GetComponent<Enemy>().OnHit(damage * 2);
+            }
+            else
+            {
+                col.GetComponent<Enemy>().OnHit(damage);
+            }
+
+            var cacheTransform = transform;
+            Instantiate(hitVFX, cacheTransform.position, cacheTransform.rotation);
             OnDeSpawn();
         }
     }

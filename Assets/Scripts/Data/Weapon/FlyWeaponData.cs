@@ -9,4 +9,5 @@ public class FlyWeaponData : ScriptableObject
     public float damage;
     public float critRate;
     public float thrustForce;
+    public float lifeTime;
 }

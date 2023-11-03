@@ -94,9 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248b0af5b147e4c40918176b2e94936c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyWeaponData: {fileID: 11400000, guid: be6029f0a9bdd5042bc1ab26c364869e, type: 2}
   rb: {fileID: 5089167461062321741}
-  speed: 5
-  damage: 50
   hitVFX: {fileID: 8513715546879679345, guid: 6c9e6f1c2a8bbb1409c13a4d2bcb0581, type: 3}
 --- !u!1 &5634735660180072319
 GameObject:

@@ -16,3 +16,4 @@ MonoBehaviour:
   damage: 15
   critRate: 20
   thrustForce: 100
+  lifeTime: 4
