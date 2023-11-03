@@ -91,7 +91,6 @@ MonoBehaviour:
   healthBar: {fileID: 7837519820947549531}
   textCombatPrefabs: {fileID: 1043135529519695481, guid: 324ffc64c5b6c364c8a40a63728cfec9, type: 3}
   enemyData: {fileID: 11400000, guid: 5f1268da09a2de340851930e5670c61d, type: 2}
-  attackRange: 1
   rb: {fileID: 4744490727833108338}
   attackArea: {fileID: 3468856585828876799}
 --- !u!1 &1105355548646808588
@@ -260,7 +259,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 11.255379, y: 0.057425857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -271,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 30, y: 1}
+  m_Size: {x: 22.305042, y: 4.9049377}
   m_EdgeRadius: 0
 --- !u!50 &6717142322665952236
 Rigidbody2D:

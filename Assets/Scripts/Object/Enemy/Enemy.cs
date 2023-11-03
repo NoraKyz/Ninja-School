@@ -35,6 +35,14 @@ public class Enemy : Character
             _currentState.OnExecute(this);
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("EnemyWall"))
+        {
+            ChangeDirection(!_isRight);
+        }
+    }
 
     #endregion
 
@@ -146,14 +154,6 @@ public class Enemy : Character
     {
         attackArea.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("EnemyWall"))
-        {
-            ChangeDirection(!_isRight);
-        }
-    }
-    
 
     #endregion
 }
