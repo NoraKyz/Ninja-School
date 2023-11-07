@@ -14,6 +14,9 @@ public class PlayerData : ScriptableObject
     [Header("Jump State")]
     public float jumpForce;
     
+    [Header("Attack State")]
+    public float blastChanelTime;
+    
     [Header("Check Variables")]
     [Header("Ground Check")]
     public float castDistance;

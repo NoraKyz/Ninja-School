@@ -351,6 +351,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: ff03b3707bbcbbc49bbdd13052ab8e43, type: 2}
   rb: {fileID: 4300244648605424993}
   kunaiPrefabs: {fileID: 4665303210608445789, guid: bc40da45315db1a4b90b57648e5a6747, type: 3}
+  blastPrefabs: {fileID: 9131360143245977687, guid: f298e4b29779c174e9fec90f8b844e82, type: 3}
   throwPoint: {fileID: 4300244648846412546}
   attackArea: {fileID: 4300244648862446772}
 --- !u!1 &4300244648652097397

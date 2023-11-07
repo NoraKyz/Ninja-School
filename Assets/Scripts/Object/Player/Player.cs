@@ -11,6 +11,7 @@ public class Player : Character
 
     [Header("=========================================")]
     [SerializeField] private Kunai kunaiPrefabs;
+    [SerializeField] private Blast blastPrefabs;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
 
@@ -23,10 +24,12 @@ public class Player : Character
     private float moveSpeed;
     private float jumpForce;
     private int jumpCount;
+    private float blastChanelTime;
     
     private int coin;
     
     private Vector3 _savePoint;
+    private float timer;
 
     #region Unity Functions
 
@@ -65,6 +68,21 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.V))
         {
             Throw();
+        }
+
+        if (Input.GetKey(KeyCode.B))
+        {
+            timer += Time.deltaTime;
+            if (timer >= blastChanelTime)
+            {
+                timer = 0;
+                Blast();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            timer = 0;
         }
     }
     
@@ -112,6 +130,8 @@ public class Player : Character
         moveSpeed = playerData.speed;
         jumpForce = playerData.jumpForce;
         jumpCount = 0;
+        blastChanelTime = playerData.blastChanelTime;
+        timer = 0;
         
         _isAttack = false;
         _isJumping = false;
@@ -144,6 +164,8 @@ public class Player : Character
         }
 
         _horizontal = Input.GetAxisRaw("Horizontal");
+        
+        Debug.Log(_horizontal);
 
         if (_isGrounded)
         {
@@ -224,6 +246,18 @@ public class Player : Character
         ChangeAnim("throw");
         Invoke(nameof(ResetAttack), 0.35f);
         Instantiate(kunaiPrefabs, throwPoint.position, throwPoint.rotation);
+    }
+    
+    public void Blast()
+    {
+        if (_isAttack || !_isGrounded)
+        {
+            return;
+        }
+        
+        rb.velocity = Vector2.zero;
+        ChangeAnim("idle");
+        Instantiate(blastPrefabs, transform.position, throwPoint.rotation);
     }
     
     #endregion
